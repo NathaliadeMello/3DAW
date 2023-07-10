@@ -22,12 +22,24 @@
             return;
         }
 
+		if (strlen($nome) <= 25) {
+            if (strlen($cpf) === 9) {
         $sql = "INSERT INTO fiscal (nome, cpf, sala) VALUES ('$nome', '$cpf', $sala)";
-        if ($conn->query($sql) === TRUE) {
+		if ($conn->query($sql) === TRUE) {
             echo 'Fiscal incluído com sucesso.';
         } else {
             echo 'Erro ao incluir o fiscal: ' . $conn->error;
         }
+			}
+			else {
+                echo 'CPF inválido. Certifique-se de que o CPF possui 9 dígitos.' . $conn->error;
+            }
+		}
+		else{
+			echo 'O nome deve ter no máximo 25 caracteres.' . $conn->error;
+			
+			
+		}
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
